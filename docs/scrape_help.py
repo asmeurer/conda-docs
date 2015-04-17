@@ -164,12 +164,9 @@ def generate_html(command):
     command_file = command.replace(' ', '-')
 
     # Use abspath so that it always has a path separator
-    man = Popen(['man ' + abspath(join(manpath, 'conda-%s.1' % command_file))],
-        stdout=PIPE, shell=True)
+    man = Popen(['groffer', '--mode=tty', abspath(join(manpath, 'conda-%s.1' % command_file))], stdout=PIPE)
     print(man.stdout.read())
-    man = Popen(['man ' + abspath(join(manpath, 'conda-%s.1' % command_file))],
-        stdout=PIPE, shell=True)
-
+    man = Popen(['groffer', '--mode=tty', abspath(join(manpath, 'conda-%s.1' % command_file))], stdout=PIPE)
 
     htmlpage = check_output([
         'man2html',
