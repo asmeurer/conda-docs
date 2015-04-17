@@ -165,6 +165,9 @@ def generate_html(command):
 
     # Use abspath so that it always has a path separator
     man = Popen(['man', abspath(join(manpath, 'conda-%s.1' % command_file))], stdout=PIPE)
+    print(man.stdout.read())
+    man = Popen(['man', abspath(join(manpath, 'conda-%s.1' % command_file))], stdout=PIPE)
+
     htmlpage = check_output([
         'man2html',
         '-bare', # Don't use HTML, HEAD, or BODY tags
