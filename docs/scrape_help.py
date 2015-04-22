@@ -169,7 +169,16 @@ def generate_html(command):
     env['GROFF_NO_SGR'] = '1'
     man = Popen(['groffer', '--mode=tty', abspath(join(manpath, 'conda-%s.1' %
         command_file))], stdout=PIPE, env=env)
-    print(man.stdout.read())
+    htmlpage = check_output([
+        'man2html',
+        '-bare', # Don't use HTML, HEAD, or BODY tags
+        'title', 'conda-%s' % command_file,
+        '-topm', '0', # No top margin
+        '-botm', '0', # No bottom margin
+        ],
+        stdin=man.stdout)
+
+    print(htmlpage)
     man = Popen(['groffer', '--mode=tty', abspath(join(manpath, 'conda-%s.1' %
         command_file))], stdout=PIPE, env=env)
 
