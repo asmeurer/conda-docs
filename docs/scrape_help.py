@@ -167,7 +167,7 @@ def generate_html(command):
     # Use abspath so that it always has a path separator
     env = os.environ.copy()
     env['GROFF_NO_SGR'] = '1'
-    man = Popen(['groffer', '--mode=tty', abspath(join(manpath, 'conda-%s.1' %
+    man = Popen(['man', abspath(join(manpath, 'conda-%s.1' %
         command_file))], stdout=PIPE, env=env)
     htmlpage = check_output([
         'man2html',
@@ -179,7 +179,7 @@ def generate_html(command):
         stdin=man.stdout)
 
     print(htmlpage)
-    man = Popen(['groffer', '--mode=tty', abspath(join(manpath, 'conda-%s.1' %
+    man = Popen(['man', abspath(join(manpath, 'conda-%s.1' %
         command_file))], stdout=PIPE, env=env)
 
     htmlpage = check_output([
