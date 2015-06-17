@@ -10,8 +10,6 @@ from os.path import join, dirname, abspath, isdir
 from os import makedirs, pathsep
 from collections import OrderedDict
 
-from concurrent.futures import ThreadPoolExecutor
-
 try:
     from shlex import quote
 except ImportError:
@@ -114,9 +112,7 @@ def external_commands():
         command_help[command] = conda_command_help(command)
         print("Checked for subcommand help for %s" % command)
 
-    with ThreadPoolExecutor(len(commands)) as executor:
-        # list() is needed for force exceptions to be raised
-        list(executor.map(get_help, commands))
+    list(map(get_help, commands))
 
     for command in command_help:
         help = command_help[command]
