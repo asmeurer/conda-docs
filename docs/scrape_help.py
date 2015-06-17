@@ -110,6 +110,7 @@ def external_commands():
     command_help = {}
 
     def get_help(command):
+        print("Checking for subcommand help for %s" % command)
         command_help[command] = conda_command_help(command)
         print("Checked for subcommand help for %s" % command)
 
