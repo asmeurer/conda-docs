@@ -71,6 +71,7 @@ def conda_commands():
     help = conda_help()
     commands = []
     start = False
+    print(help)
     for line in help.splitlines():
         # Commands start after "command" header
         if line.strip() == 'command':
